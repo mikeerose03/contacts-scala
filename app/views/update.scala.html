@@ -1,0 +1,60 @@
+@import helper._
+@(contactForm: Form[Contact], loggedUser: Int)(implicit messages: Messages, flash: Flash)
+
+
+@template{
+	
+
+}{
+
+	<div class="row top-margin">
+
+		<div class="small-12 columns">
+			@if(flash.get("msg")){
+				<div class="@flash.get("color") callout" data-closable="slide-out-right" data-toggle="popover">
+					 <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+					    <span aria-hidden="true">&times;</span>
+					  </button>
+				@flash.get("msg") <br>
+			}
+				</div>
+		</div> <!-- end of column -->
+
+		<div class="small-12 columns center-item">
+			<h1>EDIT CONTACT</h1>
+		</div>
+
+		<div class="small-12 columns center-item">
+			<div class="row">
+				@form(routes.GirlController.updateAction){
+					<div class="small-12 columns">
+						@inputText(
+						contactForm("username"),
+							'_showConstraints -> false,
+							'placeholder -> "Username"
+						)
+					</div> 
+
+					<div class="small-12 columns">
+						@inputText(
+						contactForm("number"),
+							'_showConstraints -> false,
+							'placeholder -> "Number"
+						) 
+					</div>
+
+					<div class="small-12 columns">
+						<input type="hidden" name="contactID" id="contactID" value="@contactForm("contactID").value">
+						<input type="hidden" name="userID" id="userID" value="@loggedUser">
+						<button type="submit" class="button">Edit</button>
+					</div>
+				}
+			</div> <!-- end of row -->
+			
+		</div> <!-- end of column -->
+
+	</div> <!-- end of row -->
+	
+}{
+	
+}

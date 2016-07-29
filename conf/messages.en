@@ -1,0 +1,13 @@
+homecontroller.index.title = Home Page
+homecontroller.index.keywords = keyword1, keyword2, keyword3
+homecontroller.index.description = Hello Simple Web Site with Play Framework.
+
+homecontroller.index.top = Hello Simple Web Site with Play Framework :)
+homecontroller.index.openModal = Click Me For A Modal
+homecontroller.aindex.modal.title = Awesome
+homecontroller.index.modal.messages = Sample modal
+
+form.username = Username
+form.password = Password
+
+error.required = This is a required field

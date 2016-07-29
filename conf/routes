@@ -1,0 +1,26 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# A home page
+GET   /                           controllers.HomeController.index
+
+POST  /register                   controllers.AuthenticationController.registerAction
+GET   /login                      controllers.AuthenticationController.login
+POST  /login                      controllers.AuthenticationController.loginAction
+GET   /logout                     controllers.AuthenticationController.logout
+
+GET   /logged                     controllers.GirlController.logged
+GET   /logging 					  controllers.GirlController.isLogged
+
+GET   /insertContact              controllers.GirlController.insertContactAction
+GET   /remove/:id                 controllers.GirlController.removeContact(id:Int)
+
+GET   /update/:id                 controllers.GirlController.updateContact(id: Int)
+POST  /update                     controllers.GirlController.updateAction  
+GET   /updated                    controllers.GirlController.logged
+
+# Web jars asset
+GET   /assets/libs/*file          controllers.WebJarAssets.at(file)
+# Map static resources from the /public folder to the /assets URL path
+GET   /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

@@ -1,0 +1,84 @@
+@import helper._
+@import play.api.mvc.Request
+
+@(contactForm: Form[Contact], contacts: Seq[Contact], loggedUser: Int, username: String)(implicit messages: Messages, flash: Flash)
+
+
+@template{
+	
+}{
+	
+
+	<div class="row align-items-stretch fullWidth">
+		<div class="small-12 columns top-nav">
+			 <div class="row fullWidth">
+			 	<div class="small-6 columns">
+			 		<span><h3>My Contacts</h3></span>
+			 	</div>
+			 	<div class="small-6 columns">
+			 		<ul class="menu align-right">
+						<li><a href="/logout">LOGOUT</a></li>
+						<li class="menu-text">Hello, @username</li>
+					</ul>
+			 	</div>
+			 </div>	
+		</div> <!-- end of column --> 
+		@if(flash.get("msg")){
+		<div class="small-12 column">
+			<div class="@flash.get("color") callout" data-closable="slide-out-right" data-toggle="popover">
+				<button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+					<span aria-hidden="true">&times;</span>
+				</button>
+				@flash.get("msg")
+			</div>
+		</div> <!--end of column -->
+		}
+
+		<div class="small-12 column">
+			<div class="row fullWidth">
+				@form(routes.GirlController.insertContactAction){
+				<div class="small-6 column">
+					@inputText(
+						contactForm("username"),
+						'_showConstraints -> false,
+						'placeholder -> "Username",
+						'label -> "Username"
+					)
+
+					@inputText(
+						contactForm("number"),
+						'_showConstraints -> false,
+						'placeholder -> "Number",
+						'label -> "Number"
+					) 
+
+						<input type="hidden" name="userID" id="userID" value="@loggedUser">
+						<button class="button" type="submit">Insert Contact</button> 
+				}
+				</div> <!-- end of column -->
+				<div class="small-6 column top-margin">
+					<table role="grid">
+						<tr>
+							<th scope="column">CONTACT ID</th>
+							<th scope="column">USERNAME</th>
+							<th scope="column">NUMBER</th>
+							<th scope="column" colspan="2">OPTIONS</th>
+						</tr>
+						@for(contact <- contacts) {
+						<tr>
+							<td>@contact.contactID</td>
+							<td>@contact.username</td>
+							<td>@contact.number</td>
+							<td><a href="@routes.GirlController.removeContact(contact.contactID.get)">Delete</a></td>
+							<td><a href="@routes.GirlController.updateContact(contact.contactID.get)"> Edit </a></td>
+						</tr>  
+						}
+					</table>
+				</div> <!-- end of column -->
+			</div> <!-- end of row -->
+		</div> <!-- end of column -->
+	</div> <!-- end of row -->
+
+}{
+
+}

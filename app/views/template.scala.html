@@ -1,0 +1,17 @@
+@(header: Html)(content: Html)(footer: Html)
+
+  <link href="@routes.Assets.versioned("styles/global.css")" rel="stylesheet">
+  <link href="@routes.Assets.versioned("styles/main.css")" rel="stylesheet">
+  <link href="@routes.Assets.versioned("styles/main2.css")" rel="stylesheet">
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+</head>
+<body>
+	<section>
+		@content
+	</section>
+</body>
+</html>

@@ -1,0 +1,8 @@
+homecontroller.index.title = ホームページ
+homecontroller.index.keywords = キーワード1, キーワード2, キーワード3
+homecontroller.index.description = Play Frameworkによるシンプルウェブサイト
+
+homecontroller.index.top = Play Frameworkによるシンプルウェブサイト ^^
+homecontroller.index.openModal = クリックしてモーダルを開く
+homecontroller.index.modal.title = やったね
+homecontroller.index.modal.messages = サンプルのモーダル

@@ -1,0 +1,48 @@
+GET   /login                      controllers.GirlController.login             
+GET   /main                       controllers.MainController.index
+GET   /remove/:id                 controllers.GirlController.removeContact(id:Int)
+GET   /edit/:id                   controllers.GirlController.editContact(id: Int)
+POST  /edit/                      controllers.GirlController.updateAction
+GET   /insertContact			  controllers.GirlController.insertContactAction
+GET   /logged                     controllers.GirlController.index
+GET   /loggedin                   controllers.GirlController.loginAction
+GET   /test                       controllers.GirlController.test
+GET   /log                        controllers.GirlController.logged
+
+
+1
+@form(routes.GirlController.insertContactAction){
+						@inputText(
+							contactForm("username"),
+							'_showConstraints -> false,
+							'placeholder -> "Username",
+							'label -> "Username"
+						)
+
+						@inputText(
+							contactForm("number"),
+							'_showConstraints -> false,
+							'placeholder -> "Number",
+							'label -> "Number"
+						) 
+
+						<input type="hidden" name="id" id="id" value="@contactForm("userID").value">
+						<button class="button" type="submit">Insert Contact</button>
+					}
+
+2
+
+/* 
+
+	@inputPassword(
+		loginForm("password.main"),
+		'_showConstraints -> false,
+		'_label -> "Password"
+	)
+
+	@for(error <- loginForm.errors){
+		@Messages(error.message)
+	}
+*/
+
+

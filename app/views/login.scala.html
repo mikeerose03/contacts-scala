@@ -1,0 +1,94 @@
+@import helper._
+
+@(loginForm: Form[User], registerForm: Form[User])(implicit messages: Messages, flash: Flash)
+
+@template {
+	
+}{
+
+	<div class="row fullWidth">
+
+		<div class="small-12 column fullWidth top-nav">
+
+			<div class="row top-margin float-right">
+
+				@form(routes.AuthenticationController.loginAction){
+					<div class="small-4 columns">
+						@inputText(
+							loginForm("username"),
+							'_showConstraints -> false,
+							'label -> "Username",
+							'placeholder -> "Username"
+						)
+					</div>
+
+					<div class="small-4 columns">
+						@inputPassword(
+							loginForm("password"),
+							'_showConstraints -> false,
+							'label -> "Password",
+							'placeholder -> "Password"
+						) 
+					</div>
+					<br>
+					<div class="small-4 column align-self-bottom">
+						<button type="submit" class="button">Login</button>
+					</div>
+				}
+			</div> <!-- end of row -->
+
+		</div> <!-- end of column -->
+
+		<div class="small-12 columns">
+			@if(flash.get("msg")){
+				<div class="@flash.get("color") callout" data-closable="slide-out-right" data-toggle="popover">
+					 <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+					    <span aria-hidden="true">&times;</span>
+					  </button>
+				@flash.get("msg") <br>
+			}
+				</div>
+		</div> <!-- end of column -->
+
+		<div class="small-6 columns center-item">
+			<h1>My Contacts</h1>
+		</div>
+
+		<div class="small-6 columns">
+			<div class="row">
+	           	<div class="small-12 column">
+					<h1>SIGN UP</h1>
+				</div>
+
+				<div class="small-11 columns">
+					@form(routes.AuthenticationController.registerAction){
+						@inputText(
+							registerForm("username"),
+							'_showConstraints -> false,
+							'placeholder -> "Username"
+						)
+				</div>
+
+				<div class="small-11 columns">
+						@inputPassword(
+							registerForm("password"),
+							'_showConstraints -> false,
+							'placeholder -> "Password"
+						) 
+				</div>
+				
+				<div class="small-11 column float-left">
+						<button type="submit" class="expanded button">Register</button>
+				</div>
+					}	
+
+			</div> <!-- end of row -->
+
+		</div> <!--end of column -->
+
+	</div><!-- end of row -->
+
+
+}{	
+
+}

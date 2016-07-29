@@ -1,0 +1,32 @@
+@()(implicit header: RequestHeader, messages: Messages, pm: PageMeta, wja: WebJarAssets)
+@helper.base {
+  <link href="@routes.Assets.versioned("styles/global.css")" rel="stylesheet">
+  <link href="@routes.Assets.versioned("styles/main.css")" rel="stylesheet">
+  <link href="@routes.Assets.versioned("styles/main2.css")" rel="stylesheet">
+} {
+  <section class="row">
+    <div class="columns small-12" id="content">
+      @Messages("homecontroller.index.top")
+      <a href="#" data-toggle="modal">@Messages("homecontroller.index.openModal")</a>
+    </div>
+  </section>
+
+  <div id="modal" class="reveal" data-reveal data-close-on-click='true'>
+    <h2 id="modalTitle">@Messages("homecontroller.index.modal.title")</h2>
+    <p>@Messages("homecontroller.index.modal.messages")</p>
+    <button class="close-button" data-close aria-label="Close reveal" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <script src="@routes.WebJarAssets.at(wja.locate("jquery.min.js"))"></script>
+  <script src="@routes.WebJarAssets.at(wja.locate("foundation.core.js"))"></script>
+  <script src="@routes.WebJarAssets.at(wja.locate("foundation.util.keyboard.js"))"></script>
+  <script src="@routes.WebJarAssets.at(wja.locate("foundation.util.box.js"))"></script>
+  <script src="@routes.WebJarAssets.at(wja.locate("foundation.util.triggers.js"))"></script>
+  <script src="@routes.WebJarAssets.at(wja.locate("foundation.util.mediaQuery.js"))"></script>
+  <script src="@routes.WebJarAssets.at(wja.locate("foundation.util.motion.js"))"></script>
+  <script src="@routes.WebJarAssets.at(wja.locate("foundation.reveal.js"))"></script>
+  <script src="@routes.Assets.versioned("scripts/main.js")"></script>
+  <script src="@routes.Assets.versioned("scripts/main2.js")"></script>
+}
