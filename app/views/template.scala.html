@@ -1,4 +1,4 @@
-@(header: Html)(content: Html)(footer: Html)
+@(header: Html = Html(""))(content: Html)(footer: Html = Html(""))(implicit request: RequestHeader, wja: WebJarAssets)
 
   <link href="@routes.Assets.versioned("styles/global.css")" rel="stylesheet">
   <link href="@routes.Assets.versioned("styles/main.css")" rel="stylesheet">
@@ -7,11 +7,13 @@
 <html>
 <head>
 	<title></title>
-
+	@header
 </head>
 <body>
 	<section>
 		@content
 	</section>
+	<script src='@routes.WebJarAssets.at(wja.fullPath("jquery", "jquery.min.js"))'></script>
+	@footer
 </body>
 </html>

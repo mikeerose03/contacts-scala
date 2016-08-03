@@ -1,11 +1,8 @@
 @import helper._
-@(contactForm: Form[Contact], loggedUser: Int)(implicit messages: Messages, flash: Flash)
+@(contactForm: Form[Contact], loggedUser: Int)(implicit messages: Messages, flash: Flash, request: RequestHeader, wja: WebJarAssets)
 
 
-@template{
-	
-
-}{
+@template(){
 
 	<div class="row top-margin">
 
@@ -55,6 +52,4 @@
 
 	</div> <!-- end of row -->
 	
-}{
-	
-}
+}()

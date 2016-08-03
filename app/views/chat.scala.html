@@ -1,0 +1,45 @@
+@()(implicit messages: Messages, flash: Flash, request: RequestHeader, wja: WebJarAssets)
+
+@template(){
+	
+	<div class="border black"> CHAT PAGE
+		<div id="convo" style="height: 350px">
+			
+		</div>
+	</div>
+
+	<form>
+		<input type="text" name="username" id="username" placeholder="username">
+		<label>
+			<textarea id="msg" name="message"> </textarea>
+		</label>
+		<button id="send" type="submit">Send</button>
+	</form>
+
+}{
+
+	<script type="text/javascript">
+		var ws = new WebSocket('@routes.GirlController.ws.webSocketURL')
+
+		ws.onopen= function(e){
+			console.log("socket connect established");
+		};
+
+		ws.onmessage = function(data){
+			console.log(data.data);
+			$("#convo").append('<p>'+data.data+'</p>')
+				$('#convo').animate({
+					scrollTop: $('#convo').get(0).scrollHeight },2000);
+			};
+
+		$(document).ready(function(){
+			$('#send').click(function(e){
+				e.preventDefault();
+				var username = $('#username').val();
+				var message = $('#msg').val();
+				ws.send(username+":"+message);
+			});
+		});
+	</script>
+
+}

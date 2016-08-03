@@ -2,7 +2,8 @@
 @import 'settings';
 
 @include foundation-global-styles;
-@include foundation-grid;
+@include foundation-flex-grid;
+@include foundation-flex-classes;
 @include foundation-typography;
 @include foundation-button;
 @include foundation-forms;
@@ -19,7 +20,6 @@
 @include foundation-dropdown;
 @include foundation-dropdown-menu;
 @include foundation-flex-video;
-@include foundation-flex-classes;
 @include foundation-label;
 @include foundation-media-object;
 @include foundation-menu;

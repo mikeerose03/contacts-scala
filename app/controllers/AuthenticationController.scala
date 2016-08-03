@@ -17,7 +17,8 @@ import scala.concurrent.Future
 @Singleton
 class AuthenticationController @Inject() (
 	val messagesApi: MessagesApi,
-	val users: Users
+	val users: Users,
+	implicit val wja: WebJarAssets
 ) extends Controller with I18nSupport {
 
 	val registerForm = Form(

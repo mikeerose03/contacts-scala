@@ -20,6 +20,9 @@ GET   /update/:id                 controllers.GirlController.updateContact(id: I
 POST  /update                     controllers.GirlController.updateAction  
 GET   /updated                    controllers.GirlController.logged
 
+GET   /webSocketTest              controllers.GirlController.ws
+GET   /chatPage                   controllers.GirlController.chat
+
 # Web jars asset
 GET   /assets/libs/*file          controllers.WebJarAssets.at(file)
 # Map static resources from the /public folder to the /assets URL path

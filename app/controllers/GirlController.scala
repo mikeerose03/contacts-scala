@@ -11,6 +11,11 @@ import models._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
+import akka.actor._
+import play.api.libs.streams._
+import akka.stream._
+
+import actors._
 
 //import ejisan.play.data.Forms._
 
@@ -18,7 +23,12 @@ import scala.concurrent.Future
 class GirlController @Inject() (
 	val messagesApi: MessagesApi,
 	val users: Users,
-	val contacts: Contacts
+	val contacts: Contacts,
+
+	implicit val system: ActorSystem,
+	implicit val materializer: Materializer,
+
+	implicit val wja: WebJarAssets
 ) extends Controller with I18nSupport {
 
 
@@ -99,7 +109,23 @@ class GirlController @Inject() (
 			}
 		)
 	}
+
+	def chat = Action { implicit request => 
+		Ok(views.html.chat())
+	}
+
+	val s = ActorSystem("test")
+	val server = s.actorOf(Props[ServerActor], "server")
+
+	def ws = WebSocket.accept[String, String]{ implicit request =>
+		ActorFlow.actorRef(out => ClientActor.props(server, out))
+	} 
+
 }
+
+//to be continued
+
+
 
 
 
