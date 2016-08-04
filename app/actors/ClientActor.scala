@@ -6,7 +6,7 @@ class ClientActor(server: ActorRef, out:ActorRef) extends Actor {
 	import actors.MessagesHelper._
 
 	override def preStart() = {
-		println("...")
+		println("Getting Ready...")
 		server ! Subscribe
 	}
 

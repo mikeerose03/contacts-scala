@@ -13,7 +13,8 @@
 				 	</div>
 				 	<div class="small-6 columns">
 				 		<ul class="menu align-right">
-							<li><a href="/logout">LOGOUT</a></li>
+							<li><a href="/logout"> | LOGOUT</a></li> 
+							<li><a href="/chatPage"> | CHAT PAGE </a></li> 
 							<li class="menu-text">Hello, @username</li>
 						</ul>
 				 	</div>
@@ -31,7 +32,7 @@
 		</div> <!--end of column -->
 		}
 
-		<div class="small-12 column">
+		<div class="small-12 column expanded">
 			<div class="row expanded">
 				<div class="small-4 column">
 					@form(routes.GirlController.insertContactAction) {
@@ -50,16 +51,17 @@
 									'placeholder -> "Number",
 									'label -> "Number") 
 							</div>
+							<div class="small-12 columns">
+								<input type="hidden" name="userID" id="userID" value="@loggedUser">
+								<button class="button" type="submit">Insert Contact</button> 
+							</div>
 						</div>
 
-						<input type="hidden" name="userID" id="userID" value="@loggedUser">
-
-						<button class="button" type="submit">Insert Contact</button> 
 					}
 				</div> <!-- end of column -->
 				
 
-					<div class="small-8 colum">
+					<div class="small-8 columns">
 						<table role="grid">
 							<tr>
 								<th scope="column">CONTACT ID</th>

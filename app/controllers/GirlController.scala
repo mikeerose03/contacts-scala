@@ -111,7 +111,13 @@ class GirlController @Inject() (
 	}
 
 	def chat = Action { implicit request => 
-		Ok(views.html.chat())
+		val username = request.session.get( "username" ).getOrElse( "Annon" )
+
+		if(!username.isEmpty){
+			Ok(views.html.chat(username))
+		} else {
+			Redirect( routes.AuthenticationController.login ).flashing( "msg" -> "Something went wrong", "color" -> "alert" )
+		}
 	}
 
 	val s = ActorSystem("test")

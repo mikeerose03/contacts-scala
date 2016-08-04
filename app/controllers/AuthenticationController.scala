@@ -76,6 +76,4 @@ class AuthenticationController @Inject() (
 		)
 	}
 
-
-
 }

@@ -2,34 +2,39 @@
 @(loginForm: Form[User], registerForm: Form[User])(implicit messages: Messages, flash: Flash,request: RequestHeader, wja: WebJarAssets)
 
 @template(){
-	<div class="row fullWidth">
-		<div class="small-12 column fullWidth top-nav">
-			@form(routes.AuthenticationController.loginAction) {
-				<div class="row login float-right">
-					<div class="small-5 columns">
-						@inputText(
-							loginForm("username"),
-							'_showConstraints -> false,
-							'label -> "Username",
-							'placeholder -> "Username")
-					</div>
-					<div class="small-5 columns">
-						@inputPassword(
-							loginForm("password"),
-							'_showConstraints -> false,
-							'label -> "Password",
-							'placeholder -> "Password") 
-					</div>
-					<div class="small-2 column align-self-bottom">
-						<button type="submit" class="button">Login</button>
-					</div>
-				</div> <!-- end of row -->
-			}
+	<div class="row expanded">
+		<div class="small-12 column top-nav">
+			<div class="row expanded align-right">
+				
+				<div class="small-6 columns center-item">
+					@form(routes.AuthenticationController.loginAction) {
+						<div class="row login">
+							<div class="small-5 columns">
+								@inputText(
+									loginForm("username"),
+									'_showConstraints -> false,
+									'label -> "Username",
+									'placeholder -> "Username")
+							</div>
+							<div class="small-5 columns">
+								@inputPassword(
+									loginForm("password"),
+									'_showConstraints -> false,
+									'label -> "Password",
+									'placeholder -> "Password") 
+							</div>
+							<div class="small-2 columns align-self-bottom">
+								<button type="submit" class="button">Login</button>
+							</div>
+						</div> <!-- end of row -->
+					}
+				</div> <!-- end of column-->
+			</div><!-- end of row -->
 		</div> <!-- end of column -->
 
 		<div class="small-12 columns">
 			@if(flash.get("msg")){
-				<div class="@flash.get("color") callout" data-closable="slide-out-right" data-toggle="popover">
+				<div class="@flash.get("color") callout" data-closable data-toggle="popover">
 				 	<button class="close-button" aria-label="Dismiss alert" type="button" data-close>
 				    <span aria-hidden="true">&times;</span>
 				  </button>
@@ -38,7 +43,7 @@
 			}
 		</div> <!-- end of column -->
 
-		<div class="small-7 columns center-item">
+		<div class="small-7 columns text-center">
 			<h1>My Contacts</h1>
 		</div>
 		
