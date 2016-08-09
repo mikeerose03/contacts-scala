@@ -3,15 +3,15 @@
 @template(){
 	
 	<div class="row expanded top-margin">
-		<div class="small-6 columns">
-			<div class="border black">
-				<div id="convo" style="height: 750px">
-					
-				</div>
-			</div>
-		</div> <!-- end of column -->
 
-		<div class="small-6 columns">
+		<div class="small-4 columns">
+
+		</div> <!-- end of column -->
+	
+		<div class="small-8 columns">
+			<div id="convo">
+					
+			</div>
 			<form>
 				<input type="hidden" name="username" id="username" value="@username">
 				<label>
@@ -20,12 +20,11 @@
 				<button id="send" type="submit" class="button">Send</button>
 			</form>
 		</div> <!-- end of column -->
-
 	</div> <!-- end of container -->
 
-
-
 }{
+		
+	<input type="hidden" id="loggedUser" value="@request.session.get("username")">
 
 	<script type="text/javascript">
 		var ws = new WebSocket('@routes.GirlController.ws.webSocketURL')
@@ -35,18 +34,40 @@
 		};
 
 		ws.onmessage = function( data ){
-			console.log( data.data );
-			$( "#convo" ).append( '<p align=left>' + data.data + '</p>' )
-				$('#convo').animate({
-					scrollTop: $( '#convo' ).get( 0 ).scrollHeight }, 2000 );
-			};
+			console.log( data );
 
-		$(document).ready(function(){
-			$( '#send' ).click(function( e ){
+			var data = JSON.parse(data.data);
+			var text = data.message;
+			var loggedUser = $( '#loggedUser' ).val();
+
+
+			if(data.type != "con") {
+				if( data.username != loggedUser) {
+					$( '#convo' ).append( '<p align="left">' + '<span class="username">' + data.username + '</span>' + '<span class="message sender"> ' + text + '</span>' + '</p>'  )
+				} else {
+					$( '#convo' ).append( '<p align="right">' + '</span>' + '<span class="message self">' + text + '</span>' + '<span class="username">' + data.username + '</p>' )
+				}
+			} else {
+				$( '#convo' ).append( '<p class="message con">' + text + '</p>' )
+			}
+
+			$( '#convo' ).animate({
+				scrollTop: $( '#convo' ).get( 0 ).scrollHeight }, 2000 );
+		};
+
+		$( document ).ready( function(){
+			$( '#send' ).click( function( e ){
 				e.preventDefault();
-				var username = $( '#username' ).val();
 				var message = $( '#msg' ).val();
-				ws.send( username + ": " + message);
+				var username = $( '#username' ).val();
+
+				var data = {
+					"message": message,
+					"username": username,
+					"type": "message"
+				}
+
+				ws.send((JSON.stringify(data)));
 			});
 		});
 	</script>

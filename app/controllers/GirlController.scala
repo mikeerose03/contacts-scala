@@ -17,6 +17,8 @@ import akka.stream._
 
 import actors._
 
+import play.api.libs.json._
+
 //import ejisan.play.data.Forms._
 
 @Singleton
@@ -120,11 +122,12 @@ class GirlController @Inject() (
 		}
 	}
 
-	val s = ActorSystem("test")
-	val server = s.actorOf(Props[ServerActor], "server")
 
-	def ws = WebSocket.accept[String, String]{ implicit request =>
-		ActorFlow.actorRef(out => ClientActor.props(server, out))
+	def ws = WebSocket.accept[JsValue, JsValue]{ implicit request =>
+
+		val username =  request.session.get( "username" ).getOrElse( "Annon" )
+
+		ActorFlow.actorRef(out => ClientActor.props(username, out))
 	} 
 
 }

@@ -72,7 +72,6 @@ class AuthenticationController @Inject() (
 					else Ok( "Error" )
 				}
 			}	
-			
 		)
 	}
 

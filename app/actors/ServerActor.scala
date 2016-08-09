@@ -4,13 +4,23 @@ import akka.actor._
 import akka.event.LoggingReceive
 
 class ServerActor extends Actor {
-	import actors.MessagesHelper._
+	import MessagesHelper._
 	
-	var users = Set[ActorRef]()
+	var users = scala.collection.mutable.ListBuffer.empty[(String, ActorRef)]
 
 	def receive = {
-		case Subscribe => users += sender
-		case m: Message => users.foreach(_ ! m)
+		case Subscribe(username) => users += ((username, sender))
+									users.foreach(r => r._2 ! Connect(username))
+		case Disconnect(username) => users -= ((username, sender))
+									 users.foreach(r => r._2 ! Disconnect(username))
+		case m: Message => users.foreach(_._2 ! m)
 		case _ => println("No messages received")
 	}
+}
+
+object MessagesHelper {
+	case class Subscribe(username: String)
+	case class Connect(username: String)
+	case class Disconnect(username: String)
+	case class Message(msg: String, username: String, msgType: String)
 }
